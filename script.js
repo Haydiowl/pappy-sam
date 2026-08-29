@@ -60,3 +60,54 @@ document.querySelectorAll('[data-expertise-tab]').forEach(tab => {
 });
 
 keepNextAccordionOpen('.about-accordion');
+
+const enableSectionReveals = () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+  const sectionSelectors = [
+    '.nav',
+    '.hero-copy',
+    '.hero-art',
+    '.heading',
+    '.about-heading',
+    '.expertise-heading',
+    '.stats > article',
+    '.about-portrait',
+    '.about-accordion',
+    '.expertise-tabs',
+    '.expertise-panel article',
+    '.process-cards article',
+    '.faq-intro',
+    '.faq-list details',
+    '.contact-panel',
+    '.contact-copy',
+    '.quote-grid figure',
+    '.footer-top > *',
+    '.footer-bottom'
+  ];
+  const sections = [...document.querySelectorAll('.hero, main > section, footer')];
+  const targets = [];
+
+  sections.forEach(section => {
+    const sectionTargets = [...new Set(sectionSelectors.flatMap(selector => [...section.querySelectorAll(selector)]))];
+    sectionTargets.forEach((target, index) => {
+      target.classList.add('reveal-item');
+      target.style.setProperty('--reveal-delay', `${Math.min(index * 65, 390)}ms`);
+      targets.push(target);
+    });
+  });
+
+  document.documentElement.classList.add('motion-ready');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+
+  targets.forEach(target => observer.observe(target));
+};
+
+enableSectionReveals();
