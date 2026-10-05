@@ -90,7 +90,7 @@
 
 /* Keep the hero readable on compact tablets and phones. */
 @media(max-width:700px){
-  .hero{height:1160px}
+  .hero{height:1040px}
   .hero-copy{padding-top:32px}
   .hero h1{max-width:620px;font-size:clamp(30px,7.1vw,42px);line-height:1.1;letter-spacing:-1.6px}
   .hero-copy p{max-width:420px;margin:14px 0 18px;font-size:clamp(13px,2.8vw,15px);line-height:1.55}
@@ -100,7 +100,7 @@
   .hero-art{top:680px}
 }
 @media(max-width:480px){
-  .hero{height:1125px}
+  .hero{height:1000px}
   .hero h1{font-size:30px;letter-spacing:-1.5px}
   .hero-copy p{max-width:335px;font-size:12.5px;line-height:1.6}
   .hero-art{top:660px;width:340px;height:510px}
@@ -298,3 +298,9 @@ footer:before{inset:0;width:auto;height:auto;transform:none;border-radius:0;opac
 /* Match the explanatory accordion copy to the FAQ introduction text. */
 .about-panel{color:var(--muted);font-size:17px;line-height:1.68;letter-spacing:-.34px}
 @media(max-width:480px){.about-panel{font-size:16px;line-height:1.68;letter-spacing:-.32px}}
+
+/* Mobile form headings stay on one line in every contact tab, with roomier booking fields. */
+@media(max-width:560px){
+  .service-form h3{margin:0 -24px;padding:0 12px;white-space:nowrap;text-align:center;letter-spacing:-.3px;font-size:clamp(12px,4vw,17px);line-height:1.35}
+  .booking-fields{gap:18px}
+}
